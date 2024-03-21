@@ -15,6 +15,12 @@ import TodoIcon from "../assets/icons/todolist.svg";
 const Input = () => {
   const [taskName, setTaskName] = useState("");
 
+  const handleAddTask = (e) => {
+    e.preventDefault();
+    console.log(taskName);
+    setTaskName("");
+  };
+
   return (
     <>
       {/* <Responsive> */}
@@ -32,10 +38,17 @@ const Input = () => {
             id="standard-basic"
             label="Add your TODO"
             variant="standard"
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+            required
           />
         </Box>
         <Box height={100} width={200} sx={{ p: 2.5 }}>
-          <Button sx={{ width: "14ch" }} variant="contained">
+          <Button
+            onClick={handleAddTask}
+            sx={{ width: "14ch" }}
+            variant="contained"
+          >
             Add
           </Button>
         </Box>
