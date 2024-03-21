@@ -15,7 +15,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import closeIcon from "../assets/icons/close.svg";
 import editIcon from "../assets/icons/edit.svg";
-import { taskRemove } from "../redux/features/todo/todoSlice";
+import { taskRemove, taskStatus } from "../redux/features/todo/todoSlice";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos.tasks);
@@ -27,6 +27,10 @@ const TodoList = () => {
   // const tasks = todos.tasks.map((task) => (task.name, task.id));
 
   // console.log(tasks);
+
+  const handleToggleStatus = (id) => {
+    dispatch(taskStatus(id));
+  };
 
   const handleDeleteTask = (id) => {
     dispatch(taskRemove(id));
@@ -84,8 +88,12 @@ const TodoList = () => {
                     <TableCell align="center">{task.id}</TableCell>
                     <TableCell align="center">{task.name}</TableCell>
                     <TableCell align="center">
-                      <Button>completed</Button>
-                      <Button color="error">incomplete</Button>
+                      <Button
+                        onClick={() => handleToggleStatus(task.id)}
+                        color={task.status ? "primary" : "error"}
+                      >
+                        {task.status ? "completed" : "incomplete"}
+                      </Button>
                     </TableCell>
                     <TableCell align="center">
                       <Box
