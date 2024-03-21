@@ -12,13 +12,16 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import closeIcon from "../assets/icons/close.svg";
 import editIcon from "../assets/icons/edit.svg";
+import { taskRemove } from "../redux/features/todo/todoSlice";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos.tasks);
   console.log("🚀 ~ Input ~ todos:", todos);
+  const dispatch = useDispatch();
+
   const totalTaskLength = todos.length;
 
   // const tasks = todos.tasks.map((task) => (task.name, task.id));
@@ -26,7 +29,7 @@ const TodoList = () => {
   // console.log(tasks);
 
   const handleDeleteTask = (id) => {
-    console.log("delete task");
+    dispatch(taskRemove(id));
   };
 
   const handleEditTask = () => {
@@ -100,7 +103,7 @@ const TodoList = () => {
                           />
                         </Button>
                         <Button
-                          onClick={() => handleDeleteTask()}
+                          onClick={() => handleDeleteTask(task.id)}
                           color="error"
                         >
                           <img

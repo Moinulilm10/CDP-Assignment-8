@@ -20,7 +20,12 @@ export const todoSlice = createSlice({
       };
       state.tasks.push(newTodo);
     },
-    taskRemove: (state, action) => {},
+    taskRemove: (state, action) => {
+      const index = state.tasks.findIndex((todo) => todo.id === action.payload);
+      if (index !== -1) {
+        state.tasks.splice(index, 1);
+      }
+    },
     taskEdit: (state, action) => {},
     taskStatus: (state, action) => {},
   },
