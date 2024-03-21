@@ -15,7 +15,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import closeIcon from "../assets/icons/close.svg";
 import editIcon from "../assets/icons/edit.svg";
-import { taskRemove, taskStatus } from "../redux/features/todo/todoSlice";
+import {
+  taskAllRemove,
+  taskRemove,
+  taskStatus,
+} from "../redux/features/todo/todoSlice";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos.tasks);
@@ -40,6 +44,10 @@ const TodoList = () => {
     console.log("edit task");
   };
 
+  const handleRemoveAllTask = () => {
+    dispatch(taskAllRemove());
+  };
+
   return (
     <>
       <Stack
@@ -58,8 +66,8 @@ const TodoList = () => {
           <Button color="primary" display="block">
             Complete All Task
           </Button>
-          <Button color="primary" display="block">
-            Clear All Task
+          <Button onClick={handleRemoveAllTask} color="primary" display="block">
+            Delete All Task
           </Button>
         </Stack>
 

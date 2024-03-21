@@ -33,9 +33,13 @@ export const todoSlice = createSlice({
         todo.status = !todo.status;
       }
     },
+    taskAllRemove: (state) => {
+      state.tasks = [];
+    },
   },
 });
 
-export const { taskAdd, taskRemove, taskEdit, taskStatus } = todoSlice.actions;
+export const { taskAdd, taskRemove, taskEdit, taskStatus, taskAllRemove } =
+  todoSlice.actions;
 
 export default todoSlice.reducer;
