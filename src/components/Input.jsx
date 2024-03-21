@@ -2,7 +2,7 @@ import { Box, Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TodoIcon from "../assets/icons/todolist.svg";
-import { taskAdd } from "../redux/features/todo/todoSlice";
+import { taskAdd, taskEdit } from "../redux/features/todo/todoSlice";
 
 // const Responsive = styled("Box")(({ theme }) => ({
 //   [theme.breakpoints.up("mobile")]: {
@@ -16,6 +16,7 @@ import { taskAdd } from "../redux/features/todo/todoSlice";
 
 const Input = () => {
   const [taskName, setTaskName] = useState("");
+  const [editTask, setEditTask] = useState(null);
 
   const todos = useSelector((state) => state.todos);
   console.log("🚀 ~ Input ~ todos:", todos);
@@ -24,9 +25,19 @@ const Input = () => {
   const handleAddTask = (e) => {
     e.preventDefault();
     if (taskName) {
-      dispatch(taskAdd(taskName));
+      if (editTask !== null) {
+        dispatch(taskEdit({ id: editTask, name: taskName }));
+        setEditTask(null);
+      } else {
+        dispatch(taskAdd(taskName));
+      }
       setTaskName("");
     }
+  };
+
+  const handleEditTask = (taskId, taskName) => {
+    setEditTask(taskId);
+    setTaskName(taskName);
   };
 
   return (
@@ -57,7 +68,7 @@ const Input = () => {
             sx={{ width: "14ch" }}
             variant="contained"
           >
-            Add
+            {editTask !== null ? "Edit" : "Add"}
           </Button>
         </Box>
       </Stack>

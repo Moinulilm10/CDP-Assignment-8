@@ -26,7 +26,12 @@ export const todoSlice = createSlice({
         state.tasks.splice(index, 1);
       }
     },
-    taskEdit: (state, action) => {},
+    taskEdit: (state, action) => {
+      const todo = state.tasks.find((todo) => todo.id === action.payload.id);
+      if (todo) {
+        todo.name = action.payload.name;
+      }
+    },
     taskStatus: (state, action) => {
       const todo = state.tasks.find((todo) => todo.id === action.payload);
       if (todo) {

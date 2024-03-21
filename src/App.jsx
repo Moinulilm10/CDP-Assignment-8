@@ -1,5 +1,5 @@
 import { Container, Stack } from "@mui/material";
-import Input from "./components/Input";
+// import Input from "./components/Input";
 import Title from "./components/Title";
 import TodoList from "./components/TodoList";
 
@@ -14,7 +14,7 @@ function App() {
           spacing={4}
         >
           <Title />
-          <Input />
+          {/* <Input /> */}
           <TodoList />
         </Stack>
       </Container>

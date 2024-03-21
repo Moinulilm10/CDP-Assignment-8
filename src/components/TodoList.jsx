@@ -9,15 +9,21 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  TextField,
   Typography,
 } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux";
 import closeIcon from "../assets/icons/close.svg";
 import editIcon from "../assets/icons/edit.svg";
+import TodoIcon from "../assets/icons/todolist.svg";
+
+import { useState } from "react";
 import {
+  taskAdd,
   taskAllComplete,
   taskAllRemove,
+  taskEdit,
   taskRemove,
   taskStatus,
 } from "../redux/features/todo/todoSlice";
@@ -41,9 +47,9 @@ const TodoList = () => {
     dispatch(taskRemove(id));
   };
 
-  const handleEditTask = () => {
-    console.log("edit task");
-  };
+  // const handleEditTask = (id, name) => {
+  //   dispatch(taskEdit(id, name));
+  // };
 
   const handleRemoveAllTask = () => {
     dispatch(taskAllRemove());
@@ -53,8 +59,60 @@ const TodoList = () => {
     dispatch(taskAllComplete());
   };
 
+  const [taskName, setTaskName] = useState("");
+  const [editTask, setEditTask] = useState(null);
+
+  const handleAddTask = (e) => {
+    e.preventDefault();
+    if (taskName) {
+      if (editTask !== null) {
+        dispatch(taskEdit({ id: editTask, name: taskName }));
+        setEditTask(null);
+      } else {
+        dispatch(taskAdd(taskName));
+      }
+      setTaskName("");
+    }
+  };
+
+  const handleEditTask = (taskId, taskName) => {
+    setEditTask(taskId);
+    setTaskName(taskName);
+  };
+
   return (
     <>
+      {/* input field  */}
+      <Stack sx={{ paddingLeft: "12rem" }} spacing={3} direction="row">
+        <img height={40} width={40} src={TodoIcon} alt="todo_icon" />
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1, width: "60ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="standard-basic"
+            label="Add your TODO"
+            variant="standard"
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+            required
+          />
+        </Box>
+        <Box height={100} width={200} sx={{ p: 2.5 }}>
+          <Button
+            onClick={handleAddTask}
+            sx={{ width: "14ch" }}
+            variant="contained"
+          >
+            {editTask !== null ? "Edit" : "Add"}
+          </Button>
+        </Box>
+      </Stack>
+
       <Stack
         direction="column"
         justifyContent="flex-start"
@@ -133,7 +191,10 @@ const TodoList = () => {
                           justifyContent: "center",
                         }}
                       >
-                        <Button onClick={handleEditTask} color="primary">
+                        <Button
+                          onClick={() => handleEditTask(task.id, task.name)}
+                          color="primary"
+                        >
                           <img
                             height={25}
                             width={25}
