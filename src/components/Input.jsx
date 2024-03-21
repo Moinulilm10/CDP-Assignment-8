@@ -1,6 +1,8 @@
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import TodoIcon from "../assets/icons/todolist.svg";
+import { taskAdd } from "../redux/features/todo/todoSlice";
 
 // const Responsive = styled("Box")(({ theme }) => ({
 //   [theme.breakpoints.up("mobile")]: {
@@ -15,10 +17,16 @@ import TodoIcon from "../assets/icons/todolist.svg";
 const Input = () => {
   const [taskName, setTaskName] = useState("");
 
+  const todos = useSelector((state) => state.todos);
+  console.log("🚀 ~ Input ~ todos:", todos);
+  const dispatch = useDispatch();
+
   const handleAddTask = (e) => {
     e.preventDefault();
-    console.log(taskName);
-    setTaskName("");
+    if (taskName) {
+      dispatch(taskAdd(taskName));
+      setTaskName("");
+    }
   };
 
   return (
