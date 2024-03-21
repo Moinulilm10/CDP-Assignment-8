@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import closeIcon from "../assets/icons/close.svg";
 import editIcon from "../assets/icons/edit.svg";
 import {
+  taskAllComplete,
   taskAllRemove,
   taskRemove,
   taskStatus,
@@ -48,6 +49,10 @@ const TodoList = () => {
     dispatch(taskAllRemove());
   };
 
+  const handleCompleteAllTask = () => {
+    dispatch(taskAllComplete());
+  };
+
   return (
     <>
       <Stack
@@ -63,7 +68,11 @@ const TodoList = () => {
         </Divider>
 
         <Stack direction="row" justifyContent="space-between">
-          <Button color="primary" display="block">
+          <Button
+            onClick={handleCompleteAllTask}
+            color="primary"
+            display="block"
+          >
             Complete All Task
           </Button>
           <Button onClick={handleRemoveAllTask} color="primary" display="block">
@@ -93,8 +102,22 @@ const TodoList = () => {
               <TableBody>
                 {todos.map((task) => (
                   <TableRow key={task.id}>
-                    <TableCell align="center">{task.id}</TableCell>
-                    <TableCell align="center">{task.name}</TableCell>
+                    <TableCell
+                      style={{
+                        textDecoration: task.status ? "line-through" : "none",
+                      }}
+                      align="center"
+                    >
+                      {task.id}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        textDecoration: task.status ? "line-through" : "none",
+                      }}
+                      align="center"
+                    >
+                      {task.name}
+                    </TableCell>
                     <TableCell align="center">
                       <Button
                         onClick={() => handleToggleStatus(task.id)}
