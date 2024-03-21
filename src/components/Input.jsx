@@ -1,6 +1,6 @@
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import TodoIcon from "../assets/icons/todolist.svg";
 import { taskAdd, taskEdit } from "../redux/features/todo/todoSlice";
 
@@ -18,8 +18,6 @@ const Input = () => {
   const [taskName, setTaskName] = useState("");
   const [editTask, setEditTask] = useState(null);
 
-  const todos = useSelector((state) => state.todos);
-  console.log("🚀 ~ Input ~ todos:", todos);
   const dispatch = useDispatch();
 
   const handleAddTask = (e) => {
@@ -33,11 +31,6 @@ const Input = () => {
       }
       setTaskName("");
     }
-  };
-
-  const handleEditTask = (taskId, taskName) => {
-    setEditTask(taskId);
-    setTaskName(taskName);
   };
 
   return (

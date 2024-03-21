@@ -13,8 +13,12 @@ export const todoSlice = createSlice({
   initialState: initialTodos,
   reducers: {
     taskAdd: (state, action) => {
+      const newId =
+        state.tasks.length > 0
+          ? Math.max(...state.tasks.map((task) => task.id)) + 1
+          : 1;
       const newTodo = {
-        id: Date.now(),
+        id: newId,
         name: action.payload,
         status: false,
       };

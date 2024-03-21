@@ -30,14 +30,12 @@ import {
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos.tasks);
-  console.log("🚀 ~ Input ~ todos:", todos);
   const dispatch = useDispatch();
 
+  const [taskName, setTaskName] = useState("");
+  const [editTask, setEditTask] = useState(null);
+
   const totalTaskLength = todos.length;
-
-  // const tasks = todos.tasks.map((task) => (task.name, task.id));
-
-  // console.log(tasks);
 
   const handleToggleStatus = (id) => {
     dispatch(taskStatus(id));
@@ -49,14 +47,12 @@ const TodoList = () => {
 
   const handleRemoveAllTask = () => {
     dispatch(taskAllRemove());
+    setTaskName("");
   };
 
   const handleCompleteAllTask = () => {
     dispatch(taskAllComplete());
   };
-
-  const [taskName, setTaskName] = useState("");
-  const [editTask, setEditTask] = useState(null);
 
   const handleAddTask = (e) => {
     e.preventDefault();
