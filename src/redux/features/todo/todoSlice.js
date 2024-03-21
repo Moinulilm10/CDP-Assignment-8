@@ -11,9 +11,14 @@ const initialTodos = {
 export const todoSlice = createSlice({
   name: "todos",
   initialState: initialTodos,
-  reducers: {},
+  reducers: {
+    taskAdd: (state, action) => {},
+    taskRemove: (state, action) => {},
+    taskEdit: (state, action) => {},
+    taskStatus: (state, action) => {},
+  },
 });
 
-// export const {} = todoSlice.actions;
+export const { taskAdd, taskRemove, taskEdit, taskStatus } = todoSlice.actions;
 
 export default todoSlice.reducer;

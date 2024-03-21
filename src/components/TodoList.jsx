@@ -30,6 +30,15 @@ const TodoList = () => {
           </Typography>
         </Divider>
 
+        <Stack direction="row" justifyContent="space-between">
+          <Button color="primary" display="block">
+            Complete All Task
+          </Button>
+          <Button color="primary" display="block">
+            Clear All Task
+          </Button>
+        </Stack>
+
         <Container sx={{ backgroundColor: "#FAF9F6" }} maxWidth="lg">
           <Table sx={{ minWidth: 850 }}>
             <TableHead>

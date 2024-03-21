@@ -1,4 +1,5 @@
 import { Box, Button, Stack, TextField } from "@mui/material";
+import { useState } from "react";
 import TodoIcon from "../assets/icons/todolist.svg";
 
 // const Responsive = styled("Box")(({ theme }) => ({
@@ -12,6 +13,8 @@ import TodoIcon from "../assets/icons/todolist.svg";
 // }));
 
 const Input = () => {
+  const [taskName, setTaskName] = useState("");
+
   return (
     <>
       {/* <Responsive> */}
