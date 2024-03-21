@@ -47,10 +47,6 @@ const TodoList = () => {
     dispatch(taskRemove(id));
   };
 
-  // const handleEditTask = (id, name) => {
-  //   dispatch(taskEdit(id, name));
-  // };
-
   const handleRemoveAllTask = () => {
     dispatch(taskAllRemove());
   };
@@ -78,6 +74,9 @@ const TodoList = () => {
   const handleEditTask = (taskId, taskName) => {
     setEditTask(taskId);
     setTaskName(taskName);
+
+    // take me to input filed with smooth scroll
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
